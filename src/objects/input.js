@@ -17,28 +17,12 @@ var Controller = function(keys){
 	this.getKey = function(key){
 		return this.keys[key][1];
 	}
-}
 
-var controllerA = new Controller({ 
-	left: "left",
-	right: "right",
-	up: "up",
-	down: "down",
-	attack: "m",
-	juggle: "n"
-});
-//var controllerB = new Controller({ left: ["s", false] });
-
-controllers.push(controllerA)
-//controllers.push(controllerB)
-
-for (var i in controllers){
-	controller = controllers[i]
-	for (var key in controller.keys) {
+	for (var key in this.keys) {
 	  listener.register_combo({
-	    keys              : controller.keys[key][0],
-	    on_keydown        : controller.keyDown.bind(controller, [key]),
-	    on_keyup          : controller.keyUp.bind(controller, [key]),
+	    keys              : this.keys[key][0],
+	    on_keydown        : this.keyDown.bind(this, [key]),
+	    on_keyup          : this.keyUp.bind(this, [key]),
 	    prevent_repeat    : true
 		});
 	}

@@ -4,8 +4,8 @@ function resize()
 	var width = $(window).width(); 
 	var height = $(window).height(); 
 	
-	if(width > 800)width  = 800;
-	if(height > 600)height = 600;
+	if(width > config.width)width  = config.width;
+	if(height > config.height)height = config.height;
 	
 	maxX = width;
 	minX = 0;
@@ -29,10 +29,7 @@ function update()
 	global.stats.begin();
 	for (var i = 0; i < Character.array.length; i++) 
 	{
-		var guy = Character.array[i];
-		guy.xSpd = 1;
-		guy.ySpd = 1;
-		guy.move();		
+		Character.array[i].frameAction();		
 	}
 	global.screen.render();
 	requestAnimFrame(update);
