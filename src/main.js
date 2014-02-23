@@ -29,7 +29,15 @@ function update()
 	global.stats.begin();
 	for (var i = 0; i < Character.array.length; i++) 
 	{
-		Character.array[i].frameAction();		
+		Character.array[i].frameAction();
+		if(i==0){
+			console.log(Character.array[i].deaths)
+			$('#p1Death').html(Character.array[i].deaths);
+			$('#p1Percent').html(Character.array[i].percentDmg);
+		}else{
+			$('#p2Death').html(Character.array[i].deaths);
+			$('#p2Percent').html(Character.array[i].percentDmg);
+		}	
 	}
 	global.screen.render();
 	requestAnimFrame(update);

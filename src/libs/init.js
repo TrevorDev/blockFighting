@@ -13,8 +13,8 @@ function onReady()
 		right: "right",
 		up: "up",
 		down: "down",
-		attack: "m",
-		juggle: "n"
+		attack: ".",
+		juggle: ","
 	});
 
 	var controllerB = new Controller({ 
@@ -22,10 +22,11 @@ function onReady()
 		right: "d",
 		up: "w",
 		down: "s",
-		attack: "r",
-		juggle: "t"
+		attack: "c",
+		juggle: "v"
 	});
-	new Character(config.width/2+200, 0, 40, 40, "assets/characters/nifty/nifty.png", controllerA);
+	var p1 = new Character(config.width/2+200, 0, 40, 40, "assets/characters/nifty/nifty.png", controllerA);
+	p1.sprite.alpha=0.5;
 	new Character(config.width/2-200, 0, 40, 40, "assets/characters/nifty/nifty.png", controllerB);
 	var ground = new Wall(config.width/2 - 500/2, config.height*3/4, 500, 30, "assets/walls/finalDestination/wall.png");
 	global.currentLevel = new Level([ground]);

@@ -19,11 +19,17 @@ function Character(x, y, width, height, spritePath, controller){
 		if(this.controller.getKey("left")){
 			this.hitDir = "x";
 			this.xSpd-=this.moveAcc;
+			if(this.xSpd<-this.maxTopSpeed&&this.xSpd>-this.maxTopSpeed-2*this.moveAcc){
+				this.xSpd=-this.maxTopSpeed;
+			}
 			this.xScale = -1;
 		}
 		if(this.controller.getKey("right")){
 			this.hitDir = "x";
 			this.xSpd+=this.moveAcc;
+			if(this.xSpd>this.maxTopSpeed&&this.xSpd<this.maxTopSpeed+2*this.moveAcc){
+				this.xSpd=this.maxTopSpeed;
+			}
 			this.xScale = 1;
 		}
 		if(this.controller.getKey("up")){
@@ -97,6 +103,7 @@ function Character(x, y, width, height, spritePath, controller){
 		this.y+= yFix;
 
 		if(this.y > 500){
+			this.deaths++;
 			this.x = 500;
 			this.y = 0;
 			this.xSpd = 0;
@@ -110,6 +117,9 @@ function Character(x, y, width, height, spritePath, controller){
 	this.checkWallCollision = function(xMove, yMove){
 		for (var i in global.currentLevel.walls){
 			if(delta = Collision.rect(this, global.currentLevel.walls[i], xMove, yMove)){
+				if(yMove&&delta&&(this.xSpd<this.maxTopSpeed+1&&!this.controller.getKey("right"))&&(this.xSpd>-this.maxTopSpeed-1&&!this.controller.getKey("left"))){
+					this.xSpd=0;
+				}
 				return delta;
 			}
 		}
@@ -134,13 +144,15 @@ function Character(x, y, width, height, spritePath, controller){
 	this.jumpCount = 0;
 	this.jumpKeyDown = false;
 	this.percentDmg = 0;
+	this.deaths = 0;
 
 	this.maxJumps = 3;
 	this.jumpPower = 10;
 	this.width;
 	this.height;
 	this.setDim(width,height);
-	this.moveAcc = 0.2;
+	this.moveAcc = 1;
+	this.maxTopSpeed = 5;
 
 	Character.array.push(this)
 }
