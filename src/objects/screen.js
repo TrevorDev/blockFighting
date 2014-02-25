@@ -3,7 +3,7 @@ function Screen (width, height) {
 		this.canvas.width = width;
 		this.canvas.height = height;
 
-		this.renderer = PIXI.autoDetectRenderer(800, 600);
+		this.renderer = PIXI.autoDetectRenderer(config.width, config.height);
 		this.renderer.view.style.position = "absolute";
 		document.body.appendChild(this.renderer.view);
 

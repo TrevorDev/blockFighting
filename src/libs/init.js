@@ -1,7 +1,9 @@
 $(document).ready(onReady)
+$(window).resize(resize)
+window.onorientationchange = resize;
 function onReady()
 {
-	global.screen = new Screen(800, 600);
+	global.screen = new Screen(config.width, config.height);
 	
 	global.stats = new Stats();
 	document.body.appendChild( global.stats.domElement );
